@@ -6,7 +6,7 @@ that you will be able to find your server!
 
 ## Initial Setup
 
-ALT uses (firebase)[https://www.firebase.com] to store the list of nodes and IPs. This means that the first step to get up
+ALT uses [firebase](https://www.firebase.com) to store the list of nodes and IPs. This means that the first step to get up
 and running is to head over there and create a free account.
 
 If you want to track a computer's address, you want to run the `alt_updater.py` script.  
