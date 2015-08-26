@@ -13,7 +13,7 @@ def alt_update():
 
     stored_node = node_repo.get_node(alt_config.get_node_name())
     actual_node = alt_node_factory.create_alt_node(alt_config.get_node_name())
-    if not stored_node.equals(actual_node):
+    if stored_node is None or not stored_node.equals(actual_node):
         print "Detected node differences"
         node_repo.update_node(actual_node)
     else:

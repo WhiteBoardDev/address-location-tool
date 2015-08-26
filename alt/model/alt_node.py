@@ -31,7 +31,10 @@ class ALT_NODE:
 
 def from_json(json_text):
     json_data = json.loads(json_text)
-    node = ALT_NODE(json_data['name'])
-    node.set_local_address(json_data['local_address'])
-    node.set_exteral_address(json_data['external_address'])
-    return node
+    if json_data is not None:
+        node = ALT_NODE(json_data['name'])
+        node.set_local_address(json_data['local_address'])
+        node.set_exteral_address(json_data['external_address'])
+        return node
+    else:
+        return None
