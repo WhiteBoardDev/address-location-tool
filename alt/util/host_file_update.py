@@ -1,6 +1,8 @@
 __author__ = 'Jason Vanzin'
-import sys #used to get commandline arguments
-import re #used for regular expressions
+
+import sys  # used to get commandline arguments
+import re   # used for regular expressions
+import logging
 
 
 def exists(hostname):
@@ -40,7 +42,7 @@ def update(ipaddress, hostname):
     outputfile.close()
 
 
-def validIP(ipaddress):
+def valid_ip(ipaddress):
     """ str -> bool
     Found this on http://stackoverflow.com/questions/319279/how-to-validate-ip-address-in-python
     The function takes the IP address as a string and splits it by ".". It then checks to see if there are 4 items
@@ -61,7 +63,7 @@ def validIP(ipaddress):
     return True
 
 
-def isValidHostname(hostname):
+def is_valid_hostname(hostname):
     """ str -> bool
     Found this on from http://stackoverflow.com/questions/2532053/validate-a-hostname-string
     First it checks to see if the hostname is too long. Next, it checks to see if the first character is a number.
@@ -80,23 +82,23 @@ def isValidHostname(hostname):
 
 
 def main():
-    args = sys.argv #creates a list of argument from the command line.
-    if len(args) != 3: #if the number of arguments do not exist, exit with usage format.
-        print('usage: hostfileupdate.py [ipadddress] [hostmame]')
+    args = sys.argv     # creates a list of argument from the command line.
+    if len(args) != 3:  # if the number of arguments do not exist, exit with usage format.
+        logging.info('usage: hostfileupdate.py [ipadddress] [hostmame]')
         sys.exit(2)
     hostname = args[-1]
     ipaddress = args[-2]
 
-    if not validIP(ipaddress): #checks the IP address to see if it's valid.
-        print(ipaddress, "is not a valid IP address. Usage: hostfileupdate.py [ipadddress] [hostmame]")
+    if not valid_ip(ipaddress):  # checks the IP address to see if it's valid.
+        logging.info(ipaddress, "is not a valid IP address. Usage: hostfileupdate.py [ipadddress] [hostmame]")
         sys.exit(2)
 
-    if not isValidHostname(hostname): #checks the host name to see if it's valid.
-        print(hostname, "is not a valid hostname. Usage: hostfileupdate.py [ipadddress] [hostmame]")
+    if not is_valid_hostname(hostname):  # checks the host name to see if it's valid.
+        logging.info(hostname, "is not a valid hostname. Usage: hostfileupdate.py [ipadddress] [hostmame]")
         sys.exit(2)
 
-    if exists(hostname): #checks to see if the host name already exists in the host file and exits if it does.
-        print(hostname, 'already exists in the hostfile.')
+    if exists(hostname):  # checks to see if the host name already exists in the host file and exits if it does.
+        logging.info(hostname, 'already exists in the hostfile.')
         sys.exit(2)
 
-    update(ipaddress, hostname) #Calls the update function.
+    update(ipaddress, hostname)  # calls the update function.

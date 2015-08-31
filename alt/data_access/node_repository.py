@@ -1,4 +1,8 @@
-class Node_Repository:
+__author__ = 'whiteboarddev'
+
+
+class NodeRepository:
+
     def __init__(self, firebase_client):
         self.firebase_client = firebase_client
 

@@ -1,10 +1,15 @@
+__author__ = 'whiteboarddev'
+
 import json
 
-class ALT_NODE:
+
+class AltNode:
     def __init__(self, name):
         self.name = name
+        self.external_address = None
+        self.local_address = None
 
-    def set_exteral_address(self,external_address):
+    def set_exteral_address(self, external_address):
         self.external_address = external_address
 
     def set_local_address(self, local_address):
@@ -28,11 +33,10 @@ class ALT_NODE:
                 self.get_external_address() == other_alt_node.get_external_address())
 
 
-
 def from_json(json_text):
     json_data = json.loads(json_text)
     if json_data is not None:
-        node = ALT_NODE(json_data['name'])
+        node = AltNode(json_data['name'])
         node.set_local_address(json_data['local_address'])
         node.set_exteral_address(json_data['external_address'])
         return node

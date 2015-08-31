@@ -1,7 +1,10 @@
+__author__ = 'whiteboarddev'
+
 try:
     basestring
 except NameError:  # Python 3
     basestring = str
+
 from array import array
 from base64 import urlsafe_b64encode
 import hashlib
@@ -27,6 +30,7 @@ CLAIMS_MAP = {
     'debug': 'debug',
     'simulate': 'simulate'
 }
+
 
 def create_token(secret, data, options=None):
     """
@@ -88,19 +92,21 @@ def create_token(secret, data, options=None):
         raise RuntimeError("firebase_token_generator.create_token: generated token is too long.")
     return token
 
+
 def _validate_data(data, is_admin_token):
     if data is not None and not isinstance(data, dict):
         raise ValueError("firebase_token_generator.create_token: data must be a dictionary")
     contains_uid = (data is not None and 'uid' in data)
-    if ((not contains_uid and not is_admin_token) or (contains_uid and not isinstance(data['uid'], basestring))):
+    if (not contains_uid and not is_admin_token) or (contains_uid and not isinstance(data['uid'], basestring)):
         raise ValueError("firebase_token_generator.create_token: data must contain a \"uid\" key that must be a string.")
-    if (contains_uid and (len(data['uid']) > 256)):
+    if contains_uid and (len(data['uid']) > 256):
         raise ValueError("firebase_token_generator.create_token: data must contain a \"uid\" key that must not be longer than 256 bytes.")
+
 
 def _create_options_claims(opts):
     claims = {}
     for k in opts:
-        if (isinstance(opts[k], datetime.datetime)):
+        if isinstance(opts[k], datetime.datetime):
             opts[k] = int(calendar.timegm(opts[k].utctimetuple()))
         if k in CLAIMS_MAP:
             claims[CLAIMS_MAP[k]] = opts[k]
@@ -120,7 +126,8 @@ else:
 
 
 def _encode_json(obj):
-    return _encode(bytearray(json.dumps(obj, separators=(',',':')), 'utf-8'))
+    return _encode(bytearray(json.dumps(obj, separators=(',', ':')), 'utf-8'))
+
 
 def _sign(secret, to_sign):
     def portable_bytes(s):
@@ -129,6 +136,7 @@ def _sign(secret, to_sign):
         except TypeError:
             return bytes(s)
     return _encode(hmac.new(portable_bytes(secret), portable_bytes(to_sign), hashlib.sha256).digest())
+
 
 def _encode_token(secret, claims):
     encoded_header = _encode_json({'typ': 'JWT', 'alg': 'HS256'})

@@ -1,11 +1,13 @@
-import requests
+__author__ = 'whiteboarddev'
 
+import requests
+import logging
 import model.alt_node
 
-from data_access.firebase_token_generator import create_token
+from firebase_token_generator import create_token
 
 
-class Firebase_Client:
+class FirebaseClient:
     def __init__(self, firebase_url, firebase_secret):
         auth_payload = {"uid": "1"}
         self.token = create_token(firebase_secret, auth_payload)
@@ -14,7 +16,7 @@ class Firebase_Client:
     def save_node(self, node):
         data = node.to_json()
         url = self.firebase_url + "/hosts/" + node.get_name() + ".json"
-        print "preparing to PUT " + url + " " + data
+        logging.info("preparing to PUT " + url + " " + data)
         requests.put(url, data)
 
     def get_node(self, node_name):
