@@ -4,15 +4,17 @@ import sys
 from util import config
 from model import alt_node_factory
 import logging
+import logging.config
 from util import lifecycle_manager
 
 
 def alt_update():
 
-    logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
+    logging.config.fileConfig('logging.conf')
 
     # bootstrap application by setting configs
     lifecycle_manager.register_config(config.Config(sys.argv[1]))
+
     config_data = lifecycle_manager.get_config()
     node_repo = lifecycle_manager.get_node_repository()
 
