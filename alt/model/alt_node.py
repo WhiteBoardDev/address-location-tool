@@ -18,9 +18,7 @@ class AltNode:
         self.local_address = local_address
 
     def set_ports(self, ports):
-        if ports is not None:
-            # clean up port numbers to store in firebase
-            self.ports = ports.replace(" ", "")
+        self.ports = ports
 
     def get_name(self):
         return self.name
@@ -37,20 +35,12 @@ class AltNode:
     def equals(self, other_alt_node):
         # split apart the ports
         ports_matches = True
-        self_ports = None
-        other_ports = None
-        if self.ports is not None:
-            self_ports = self.ports.split(',')
-            [item.strip() for item in self_ports]
-        if other_alt_node.ports is not None:
-            other_ports = other_alt_node.ports.split(',')
-            [item.strip() for item in other_ports]
-
-        # compare the ports and see if they match
-        if other_ports is not None and self_ports is not None:
-            for port in other_ports:
-                ports_matches &= port in self_ports
-        elif other_ports is not None or self_ports is not None:
+        if (self.ports is not None
+                and other_alt_node.ports is not None
+                and self.ports.__len__() == other_alt_node.ports.__len__()):
+            for self_port in self.ports:
+                ports_matches &= self_port in other_alt_node.ports
+        else:
             ports_matches = False
 
         return (ports_matches and

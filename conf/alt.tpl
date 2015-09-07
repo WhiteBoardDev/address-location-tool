@@ -1,6 +1,6 @@
 {
    "node": {
       "name": "node name",
-      "ports": "port numbers (comma delimited)"
+      "ports": [ 8080, 8090 ]  <-- array of port numbers
    }
 }
