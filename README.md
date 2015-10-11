@@ -60,7 +60,7 @@ dont worry, there is more on the way. Like having your hosts file auto sync with
 ## Mass deployments
 
 To avoid writing custom installation scripts and such, head over to the
-Official [ALT Chef cookbook ](https://github.com/cnishina/alt-cookbook) to get cookin'   
+Official [ALT Chef cookbook ](https://github.com/cnishina/address-location-recipe) to get cookin'   
 
 
 # License
