@@ -41,12 +41,14 @@ def write_ports(fo, key, local_address, host_ports, proxy_data):
     for host_port in host_ports:
         for proxy in proxy_data['proxy']:
             if host_port in proxy['internal']:
-                external = proxy['external']
+                external_port = proxy['external']
                 fo.write('server {\n')
-                fo.write('   listen   ' + str(external) + ';\n')
+                fo.write('   listen   ' + str(external_port) + ';\n')
                 fo.write('   server_name   ' + key + '.' + domain_name + ';\n')
                 fo.write('   location / {\n')
                 fo.write('      proxy_pass   ' + local_address + ':' + str(host_port) + ';\n')
+                fo.write('      proxy_set_header   Host $host;\n')
+                fo.write('      proxy_set_header   X-Forwarded-For $remote_addr;\n')
                 fo.write('   }\n')
                 fo.write('}\n')
                 break
