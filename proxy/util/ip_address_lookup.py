@@ -19,7 +19,8 @@ def get_lan_ip():
     for interface in netifaces.interfaces():
         try:
             for link in netifaces.ifaddresses(interface)[netifaces.AF_INET]:
-                if str.startswith(interface, 'en') and link['addr'] != '127.0.0.1':
+                # starts with 'e' and is the last address
+                if str.startswith(interface, 'e'):
                     logging.debug(link['addr'])
         except KeyError:
             pass
