@@ -34,16 +34,16 @@ Now we need to make a configuration file to feed into the updater so it knows ho
 
 Now run the `alt_updater.py` and pass in the path to the `config.json` file
 
-        python alt/alt_updater.py config.json 
+        python alt/alt_updater.py config.json
 
 
 ## Using the Node list
 
-Now that we have a a bunch of node ips tracked in firebase its time to do something with them. 
+Now that we have a a bunch of node ips tracked in firebase its time to do something with them.
 To see if the updater worked we can curl the database.
 
         curl https://my-firebase-url.firebaseio.com/hosts.json
-        
+
         {
           "node1":{
                 "name":"node1"
@@ -56,7 +56,14 @@ cool right?
 
 dont worry, there is more on the way. Like having your hosts file auto sync with all of your tracked nodes!
 
-#License
+
+## Mass deployments
+
+To avoid writing custom installation scripts and such, head over to the
+Official [ALT Chef cookbook ](https://github.com/cnishina/address-location-recipe) to get cookin'   
+
+
+# License
 
 MIT
 
