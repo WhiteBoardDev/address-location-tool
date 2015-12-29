@@ -32,6 +32,7 @@ class Settings:
     # load the environment settings, default is to run as 'dev'
     def load_env(self, env):
         self.env = env
+
         if self.env == 'dev':
             self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             self.conf_dir = os.path.join(self.base_dir, 'conf')
@@ -41,11 +42,14 @@ class Settings:
             if 'linux' in sys.platform:
                 os_setting = linux
             elif 'darwin' in sys.platform:
-                os_setting = linux
+                logging.error('mac unsupported')
+                raise NotImplementedError
             elif 'win32' in sys.platform:
-                print 'windows'
+                logging.error('windows unsupported')
+                raise NotImplementedError
             else:
-                print 'derrrps'
+                logging.error('unknown system')
+                raise NotImplementedError
 
             self.base_dir = os_setting['base_dir']
             self.conf_dir = os_setting['conf_dir']
@@ -64,6 +68,8 @@ class Settings:
             self.proxy_config = os.path.join(self.conf_dir, 'proxy.json')
             self.alt_config = os.path.join(self.conf_dir, 'alt.json')
         elif self.run_module == 'host':
-            print 'host'
+            logging.error('host unsupported')
+            raise NotImplementedError
         else:
             logging.error('unknown command')
+            raise RuntimeWarning

@@ -7,16 +7,11 @@ def build_proxy_file(all_nodes, proxy_config):
     fo = open('proxy-nginx', 'w+')
     external_address = ip_address_lookup.get_wan_ip()
 
-    # go through each host that matches the external port number
-    # check ports from the hosts
-    # for each port, go through proxy port array and see if it matches
-
-    # go through each host
+    # go through each host that matches the external ip address
+    # and write the nginx file
     for node in all_nodes:
         # select only matching external IP addresses
         if external_address == node.external_address:
-
-            # get host ports and go through each
             try:
                 if node.ports is not None:
                     write_ports(fo, node, proxy_config)
@@ -25,10 +20,11 @@ def build_proxy_file(all_nodes, proxy_config):
 
 
 def write_ports(fo, node, proxy_config):
-    # for all ports that the node services
+    # for the nodes that match this external ip address
+    # match all ports of the node with the proxy configuration internal ports and
+    # write the nginx configuration
     for port in node.ports:
         for proxy in proxy_config.proxies:
-            # if the port
             if port in proxy.internal:
                 fo.write('server {\n')
                 fo.write('   listen   ' + str(proxy.external) + ';\n')

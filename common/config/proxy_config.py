@@ -10,7 +10,6 @@ class ProxyPorts:
 
 
 class ProxyConfig:
-
     def __init__(self, alt_config):
         json_config = json.load(file(alt_config))
         self.domain_name = json_config['domain']

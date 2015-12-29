@@ -12,3 +12,7 @@ def create(db_conf):
     if db == 'firebase':
         logging.info('using firebase db')
         return FirebaseDao(db_conf)
+    else:
+        logging.error('using unknown db, module unsupported')
+        raise NotImplementedError
+

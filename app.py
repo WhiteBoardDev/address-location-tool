@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from alt.alt import Alt
@@ -8,23 +9,30 @@ __author__ = 'cnishina'
 
 
 def main():
-    env = sys.argv[1]
-    run = sys.argv[2]
-    settings = Settings()
-    settings.load_env(env)
+    run = sys.argv[1]
+    env = None
+    if sys.argv.__len__() == 3:
+        env = sys.argv[2]
 
-    if run == 'alt':
+    try:
+        settings = Settings()
+        settings.load_env(env)
         settings.load_config(run)
-        alt = Alt(settings.alt_config, settings.db_config)
-        alt.update()
-    elif run == 'proxy':
-        settings.load_config(run)
-        proxy = Proxy(settings.alt_config, settings.proxy_config, settings.db_config)
-        proxy.update()
-    # elif run == 'host':
-    #     logging.info('proxy')
-    # else:
-    #     logging.error('unknown command')
+        if run == 'alt':
+            alt = Alt(settings.alt_config, settings.db_config)
+            alt.update()
+        elif run == 'proxy':
+            proxy = Proxy(settings.alt_config, settings.proxy_config, settings.db_config)
+            proxy.update()
+        elif run == 'host':
+            raise NotImplementedError
+        else:
+            logging.error('unknown run module')
+            raise RuntimeError
+    except RuntimeWarning:
+        pass
+    except NotImplementedError:
+        pass
 
 
 main()

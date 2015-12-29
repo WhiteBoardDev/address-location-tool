@@ -1,43 +1,52 @@
+
 # Address Location Tool (ALT)
 
-ALT is an alternative to dynamic DNS services like no-ip and dyndns. Its goal is to be able to track IPs of
-systems located on internet service providers which assign IPs dynamically. As the IP addresses rotate, be assured
-that you will be able to find your server!
+ALT is an alternative to dynamic DNS services like no-ip and dyndns. Its goal is to be able to track IPs of systems located on internet service providers which assign IPs dynamically. As the IP addresses rotate, be assured that you will be able to find your server!
 
 ## Initial Setup
 
-ALT uses [firebase](https://www.firebase.com) to store the list of nodes and IPs. This means that the first step to get up
-and running is to head over there and create a free account.
+#### Database Support
 
-If you want to track a computer's address, you want to run the `alt_updater.py` script.  
-This script does require the requests python module so make sure to install this first. I can be done with `pip`
+ALT uses [firebase](https://www.firebase.com) to store the list of nodes and IPs. This means that the first step to get up and running is to head over there and create a free account.
+
+#### Install via pip
+
+Modules used for this project are installed via [pip](https://pip.pypa.io/en/stable/installing/)
 
 
     pip install requests
+    pip install netifaces
 
 
+## Adding a node via ALT
 
-## Adding your first nodes
+Adding your first node to the database will require modifying two configuration files. The first configuration file is for your database configuration (conf/db.json). Start by editing the db.tpl file and add your firebase url and secret:
 
-Now we need to make a configuration file to feed into the updater so it knows how to behave. Here is an example:
+     {
+         "db": "firebase",
+         "config": {
+            "url": "firebase address location",
+            "secret": "firebase secret"
+         }
+    }
 
-        {
-          "node":{
-            "name":"node1"
-          },
-          "firebase":{
-            "url": "https://my-firebase-url.firebaseio.com",
-            "secret": "my-secret-key"
-          }
+Next edit the alt configuration (conf/alt.json). Start by editing the alt.tpl file. Adding port numbers for webservices is optional.
+
+    {
+        "node": {
+            "name": "node name",
+            "ports": [ 8080, 8090 ]  <-- array of port numbers
         }
+    }
+
+Now run the following:
+
+    python app.py alt dev
+
+The 'alt' is the run module and 'dev' is the environment variable.
 
 
-Now run the `alt_updater.py` and pass in the path to the `config.json` file
-
-        python alt/alt_updater.py config.json
-
-
-## Using the Node list
+#### Using the Node list in Firebase
 
 Now that we have a a bunch of node ips tracked in firebase its time to do something with them.
 To see if the updater worked we can curl the database.
@@ -45,22 +54,45 @@ To see if the updater worked we can curl the database.
         curl https://my-firebase-url.firebaseio.com/hosts.json
 
         {
-          "node1":{
-                "name":"node1"
-                "external_address":"<ip>",
-                "local_address":"<ip>"
-                }
+             "node1":{
+                  "name":"node name"
+                  "external_address":"<ip>",
+                  "local_address":"<ip>",
+                  "ports": [ 8080, 8090 ]
+             }
         }
 
-cool right?
+Cool right?
 
-dont worry, there is more on the way. Like having your hosts file auto sync with all of your tracked nodes!
+Don't worry, there is more on the way. Like having your hosts file auto sync with all of your tracked nodes!
 
 
-## Mass deployments
+## Other uses for ALT
 
-To avoid writing custom installation scripts and such, head over to the
-Official [ALT Chef cookbook ](https://github.com/cnishina/address-location-recipe) to get cookin'   
+After the nodes are populated in the database, we could use this to create host files, nginx proxies, etc.
+
+#### Creating an nginx proxy
+
+An nginx proxy file can be created for all nodes that has the same external ip address of the nginx server. It also must nodes with ports that match the internal port numbers. The internal port number will be proxied to the external port number. Edit the proxy configuration (conf/proxy.json). Start by editing the proxy.tpl file:
+
+	{
+	   "domain": "some.domain.com"
+	   "proxy": [
+	      	{
+	        	"internal": [ 8080, 8090 ],
+	        	"external": 8080
+    	  	},
+    	  	{
+    	    	"internal": [ 9000 ],
+    	    	"external": 9000
+			}
+		]
+	}
+
+
+#### Mass deployments (deprecated)
+
+To avoid writing custom installation scripts and such, head over to the Official [ALT Chef cookbook ](https://github.com/cnishina/address-location-recipe) to get cookin'   
 
 
 # License
