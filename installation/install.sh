@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCE_LOCATION=https://codeload.github.com/WhiteBoardDev/address-location-tool/tar.gz/0.1
+SOURCE_LOCATION=https://codeload.github.com/WhiteBoardDev/address-location-tool/tar.gz/0.2
 
 BIN_DIR=/opt/alt
 CONF_DIR=/etc/alt/conf
