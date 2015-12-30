@@ -5,20 +5,15 @@ ALT is an alternative to dynamic DNS services like no-ip and dyndns. Its goal is
 
 ## Initial Setup
 
-#### Database Support
+### Database Support
 
 ALT uses [firebase](https://www.firebase.com) to store the list of nodes and IPs. This means that the first step to get up and running is to head over there and create a free account.
 
-#### Install via pip
+### Installing Alt
 
-Modules used for this project are installed via [pip](https://pip.pypa.io/en/stable/installing/)
+    curl https://raw.githubusercontent.com/WhiteBoardDev/address-location-tool/master/installation/install.sh | sudo bash
 
-
-    pip install requests
-    pip install netifaces
-
-
-## Adding a node via ALT
+### Adding a node via ALT
 
 Adding your first node to the database will require modifying two configuration files. The first configuration file is for your database configuration (conf/db.json). Start by editing the db.tpl file and add your firebase url and secret:
 
@@ -46,7 +41,7 @@ Now run the following:
 The 'alt' is the run module and 'dev' is the environment variable.
 
 
-#### Using the Node list in Firebase
+### Using the Node list in Firebase
 
 Now that we have a a bunch of node ips tracked in firebase its time to do something with them.
 To see if the updater worked we can curl the database.
@@ -71,7 +66,7 @@ Don't worry, there is more on the way. Like having your hosts file auto sync wit
 
 After the nodes are populated in the database, we could use this to create host files, nginx proxies, etc.
 
-#### Creating an nginx proxy
+### Creating an nginx proxy
 
 An nginx proxy file can be created for all nodes that has the same external ip address of the nginx server. It also must nodes with ports that match the internal port numbers. The internal port number will be proxied to the external port number. Edit the proxy configuration (conf/proxy.json). Start by editing the proxy.tpl file:
 
@@ -89,13 +84,20 @@ An nginx proxy file can be created for all nodes that has the same external ip a
 		]
 	}
 
-
-#### Mass deployments (deprecated)
-
-To avoid writing custom installation scripts and such, head over to the Official [ALT Chef cookbook ](https://github.com/cnishina/address-location-recipe) to get cookin'   
+## Dev Environment Setup
 
 
-# License
+### Install via pip
+
+Modules used for this project are installed via [pip](https://pip.pypa.io/en/stable/installing/)
+
+
+    pip install requests
+    pip install netifaces
+
+
+
+## License
 
 MIT
 

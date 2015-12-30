@@ -34,7 +34,7 @@ class Settings:
         self.env = env
 
         if self.env == 'dev':
-            self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            self.base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
             self.conf_dir = os.path.join(self.base_dir, 'conf')
             self.log_conf = os.path.join(self.conf_dir, 'logging.conf')
         else:

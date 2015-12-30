@@ -4,3 +4,5 @@
 *.log
 *.log.*
 proxy-nginx
+Vagrantfile
+.vagrant
