@@ -15,7 +15,7 @@ ALT uses [firebase](https://www.firebase.com) to store the list of nodes and IPs
 
 ### Adding a node via ALT
 
-Adding your first node to the database will require modifying two configuration files. The first configuration file is for your database configuration (conf/db.json). Start by editing the db.tpl file and add your firebase url and secret:
+Adding your first node to the database will require modifying two configuration files. The first configuration file is for your database configuration (`conf/db.json`). Start by editing the `conf/db.tpl` file and add your firebase url and secret:
 
      {
          "db": "firebase",
@@ -25,7 +25,7 @@ Adding your first node to the database will require modifying two configuration 
          }
     }
 
-Next edit the alt configuration (conf/alt.json). Start by editing the alt.tpl file. Adding port numbers for webservices is optional.
+Next edit the alt configuration (`conf/alt.json`). Start by editing the `conf/alt.tpl` file. Adding port numbers for webservices is optional.
 
     {
         "node": {
@@ -38,7 +38,7 @@ Now run the following:
 
     python app.py alt dev
 
-The 'alt' is the run module and 'dev' is the environment variable.
+The 'alt' is the run module and 'dev' is the environment variable. Eventually the 'dev' variable will only be used for debugging and can be omitted.
 
 
 ### Using the Node list in Firebase
@@ -68,7 +68,7 @@ After the nodes are populated in the database, we could use this to create host 
 
 ### Creating an nginx proxy
 
-An nginx proxy file can be created for all nodes that has the same external ip address of the nginx server. It also must nodes with ports that match the internal port numbers. The internal port number will be proxied to the external port number. Edit the proxy configuration (conf/proxy.json). Start by editing the proxy.tpl file:
+An nginx proxy file can be created for all nodes that has the same external ip address of the nginx server. It also must nodes with ports that match the internal port numbers. The internal port number will be proxied to the external port number. Edit the proxy configuration (`conf/proxy.json`). Start by editing the `conf/proxy.tpl` file:
 
 	{
 	   "domain": "some.domain.com"
@@ -83,6 +83,18 @@ An nginx proxy file can be created for all nodes that has the same external ip a
 			}
 		]
 	}
+	
+Run with:
+
+	python app.py proxy dev
+
+### Updating hosts file
+
+Hosts file can be updated with ALT nodes that match the external ip address. The file in dev mode will create an `alt-hosts` file.
+
+Run with:
+
+	python app.py hosts dev
 
 ## Dev Environment Setup
 

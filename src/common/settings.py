@@ -9,6 +9,7 @@ linux = {
     'base_dir': '/opt/alt',
     'conf_dir': '/etc/alt/conf',
     'log_conf': '/var/log/',
+    'hosts_file': '/etc/hosts'
 }
 
 darwin = {}
@@ -28,6 +29,8 @@ class Settings:
         self.db_config = None
         self.alt_config = None
         self.proxy_config = None
+        self.hosts_read = None
+        self.hosts_write = None
 
     # load the environment settings, default is to run as 'dev'
     def load_env(self, env):
@@ -37,6 +40,8 @@ class Settings:
             self.base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
             self.conf_dir = os.path.join(self.base_dir, 'conf')
             self.log_conf = os.path.join(self.conf_dir, 'logging.conf')
+            self.hosts_read = '/etc/hosts'
+            self.hosts_write = 'alt-hosts'
         else:
             os_setting = None
             if 'linux' in sys.platform:
@@ -54,6 +59,8 @@ class Settings:
             self.base_dir = os_setting['base_dir']
             self.conf_dir = os_setting['conf_dir']
             self.log_conf = os_setting['log_conf']
+            self.hosts_read = os_setting['hosts_read']
+            self.hosts_write = os_setting['hosts_write']
 
         logging_config.fileConfig(self.log_conf)
 
@@ -67,9 +74,8 @@ class Settings:
             self.db_config = os.path.join(self.conf_dir, 'db.json')
             self.proxy_config = os.path.join(self.conf_dir, 'proxy.json')
             self.alt_config = os.path.join(self.conf_dir, 'alt.json')
-        elif self.run_module == 'host':
-            logging.error('host unsupported')
-            raise NotImplementedError
+        elif self.run_module == 'hosts':
+            self.db_config = os.path.join(self.conf_dir, 'db.json')
         else:
             logging.error('unknown command')
             raise RuntimeWarning

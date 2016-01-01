@@ -17,5 +17,3 @@ class Proxy:
         all_nodes = self.dao.get_all_nodes()
         nginx.build_proxy_file(all_nodes, self.proxy_config)
 
-
-
