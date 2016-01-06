@@ -15,7 +15,7 @@ ALT uses [firebase](https://www.firebase.com) to store the list of nodes and IPs
 
 ### Adding a node via ALT
 
-Adding your first node to the database will require modifying two configuration files. The first configuration file is for your database configuration (conf/db.json). Start by editing the db.tpl file and add your firebase url and secret:
+Adding your first node to the database will require modifying two configuration files. The first configuration file is for your database configuration (conf/db.json) file. Add your firebase url and secret:
 
      {
          "db": "firebase",
@@ -25,7 +25,7 @@ Adding your first node to the database will require modifying two configuration 
          }
     }
 
-Next edit the alt configuration (conf/alt.json). Start by editing the alt.tpl file. Adding port numbers for webservices is optional.
+Next edit the alt configuration (conf/alt.json) file. Adding port numbers for webservices is optional.
 
     {
         "node": {
@@ -83,18 +83,6 @@ An nginx proxy file can be created for all nodes that has the same external ip a
 			}
 		]
 	}
-
-## Dev Environment Setup
-
-
-### Install via pip
-
-Modules used for this project are installed via [pip](https://pip.pypa.io/en/stable/installing/)
-
-
-    pip install requests
-    pip install netifaces
-
 
 
 ## License
