@@ -81,6 +81,10 @@ execute with the environment variable `dev`.
 
 ## Next steps
 
+### Cron job
+
+     sudo curl -o /etc/cron.hourly/alt-cron https://raw.githubusercontent.com/WhiteBoardDev/address-location-tool/master/installation/alt-cron.sh && sudo chmod +x /etc/cron.hourly/alt-cron
+
 ### Using the Node list in Firebase
 
 Now that we have a a bunch of node IPs tracked in firebase its time to do something with them.
