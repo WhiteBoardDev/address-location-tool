@@ -125,6 +125,10 @@ An nginx proxy file can be created for all nodes that has the same external ip a
 	}
 
 
+## Developing
+
+Run the `build-depoy.sh` script to create a build and deploy the checked out version of ALT into your system.
+
 ## License
 
 MIT
