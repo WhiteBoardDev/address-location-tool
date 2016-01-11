@@ -5,13 +5,11 @@ import sys
 
 __author__ = 'cnishina'
 
-linux = {
+unix = {
     'base_dir': '/opt/alt',
     'conf_dir': '/etc/alt/conf',
     'log_conf': '/var/log/',
 }
-
-darwin = {}
 
 windows = {}
 
@@ -40,10 +38,9 @@ class Settings:
         else:
             os_setting = None
             if 'linux' in sys.platform:
-                os_setting = linux
+                os_setting = unix
             elif 'darwin' in sys.platform:
-                logging.error('mac unsupported')
-                raise NotImplementedError
+                os_setting = unix
             elif 'win32' in sys.platform:
                 logging.error('windows unsupported')
                 raise NotImplementedError
