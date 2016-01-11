@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.2
+VERSION=0.3
 SOURCE_LOCATION=https://codeload.github.com/WhiteBoardDev/address-location-tool/tar.gz/$VERSION
 
 
