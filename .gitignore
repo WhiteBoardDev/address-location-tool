@@ -6,3 +6,4 @@
 proxy-nginx
 Vagrantfile
 .vagrant
+build

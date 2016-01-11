@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /opt/alt
-python app.py
+python app.py alt
