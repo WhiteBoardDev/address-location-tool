@@ -1,0 +1,7 @@
+ {
+     "db": "firebase",
+     "config": {
+        "url": "https://luminous-heat-4042.firebaseio.com",
+        "secret": "firebase secret"
+     }
+}

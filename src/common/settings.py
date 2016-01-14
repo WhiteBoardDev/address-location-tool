@@ -8,7 +8,7 @@ __author__ = 'cnishina'
 unix = {
     'base_dir': '/opt/alt',
     'conf_dir': '/etc/alt/conf',
-    'log_conf': '/var/log/',
+    'log_conf': '/etc/alt/conf/logging.conf',
 }
 
 windows = {}

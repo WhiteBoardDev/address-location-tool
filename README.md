@@ -16,7 +16,7 @@ Once you have a database created, remember the URL to it for the configuration s
 
 **Check prerequisites**
 
-  * easy_install
+  * pip
   * curl
   * make
   * gcc

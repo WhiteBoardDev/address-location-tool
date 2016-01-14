@@ -21,7 +21,7 @@ printf "\nStarting ALT installation \n"
 ######  Check system requirements
 ####################################################################
 printf "Checking Required Installations...."
-REQUIRED_BINS=(easy_install curl python gcc make)
+REQUIRED_BINS=(pip curl python gcc make)
 for required_bin in ${REQUIRED_BINS[@]}; do
   if ! hash $required_bin 2>/dev/null; then
     printf "\n\n$required_bin is not installed! aborting!\n\n"

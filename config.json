@@ -1,0 +1,9 @@
+{
+  "node":{
+  "name":"node1"
+  },
+  "firebase":{
+    "url": "https://luminous-heat-4042.firebaseio.com",
+    "secret": "FTbIERrdOkFPsBZcPTRknklKIEX5NAPWv8m9Oh1K"
+  }
+}
