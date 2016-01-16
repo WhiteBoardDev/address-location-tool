@@ -42,6 +42,8 @@ class FirebaseDao:
                 node.ports = json_data['ports']
             node.local_addresses = json_data['local_addresses']
             node.external_address = json_data['external_address']
+            node.changed_time = json_data['changed_time']
+            node.changed_time_human = json_data['changed_time_human']
             return node
         else:
             return None
@@ -58,6 +60,8 @@ class FirebaseDao:
                     node.ports = json_data[key]['ports']
                 node.local_addresses = json_data[key]['local_addresses']
                 node.external_address = json_data[key]['external_address']
+                node.changed_time = json_data[key]['changed_time']
+                node.changed_time_human = json_data[key]['changed_time_human']
                 nodes.append(node)
         return nodes
 

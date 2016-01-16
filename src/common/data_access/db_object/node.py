@@ -9,6 +9,8 @@ class Node:
         self.ports = None
         self.local_addresses = None
         self.external_address = None
+        self.changed_time_human = None
+        self.changed_time = None
 
     def to_json(self):
         return json.dumps(self.__dict__)
