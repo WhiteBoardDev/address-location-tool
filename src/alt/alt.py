@@ -3,7 +3,7 @@ import common.data_access.dao as dao
 import common.ip_updater.ip_address_lookup as ip_address_lookup
 from common.config.alt_config import AltConfig
 from common.data_access.db_object.node import Node
-
+import time
 __author__ = 'cnishina'
 
 
@@ -21,9 +21,12 @@ class Alt:
         update_node.external_address = ip_address_lookup.get_wan_ip()
         update_node.local_addresses = ip_address_lookup.get_lan_ip()
 
-        if update_node.equals(read_node):
-            logging.info('skipping update for node: ' + self.alt_config.node_name)
-        else:
-            logging.info('updating / creating node: ' + self.alt_config.node_name)
-            self.dao.save_node(update_node)
+        if not update_node.equals(read_node):
+            update_node.changed_time = time.time()
+            update_node.changed_time_human = time.asctime(time.localtime(time.time()))
+
+        update_node.ping_time = time.time()
+        update_node.ping_time_human = time.asctime(time.localtime(time.time()))
+
+        self.dao.save_node(update_node)
 
