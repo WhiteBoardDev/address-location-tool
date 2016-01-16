@@ -24,10 +24,9 @@ def get_lan_ip():
             internal_addresses = []
             internal_addresses.append(socket.gethostbyname(socket.gethostname()))
             for link in netifaces.ifaddresses(interface)[netifaces.AF_INET]:
-                if str.startswith(interface, 'e'):
-                    internal_address = link['addr']
-                    logging.debug('internal address: ' + internal_address)
-                    internal_addresses.append(internal_address)
+                internal_address = link['addr']
+                logging.debug('internal address: ' + internal_address)
+                internal_addresses.append(internal_address)
         except KeyError:
             pass
     return internal_addresses
