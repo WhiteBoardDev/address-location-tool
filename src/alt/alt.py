@@ -19,7 +19,7 @@ class Alt:
         update_node.name = self.alt_config.node_name
         update_node.ports = self.alt_config.node_ports
         update_node.external_address = ip_address_lookup.get_wan_ip()
-        update_node.local_address = ip_address_lookup.get_lan_ip()
+        update_node.local_addresses = ip_address_lookup.get_lan_ip()
 
         if update_node.equals(read_node):
             logging.info('skipping update for node: ' + self.alt_config.node_name)

@@ -3,6 +3,7 @@ import json
 import socket
 import netifaces
 import logging
+from array import *
 
 __author__ = 'whiteboarddev'
 
@@ -20,11 +21,13 @@ def get_wan_ip():
 def get_lan_ip():
     for interface in netifaces.interfaces():
         try:
+            internal_addresses = []
+            internal_addresses.append(socket.gethostbyname(socket.gethostname()))
             for link in netifaces.ifaddresses(interface)[netifaces.AF_INET]:
-                # starts with 'e' and is the last address
                 if str.startswith(interface, 'e'):
-                    logging.debug('internal address: ' + link['addr'])
+                    internal_address = link['addr']
+                    logging.debug('internal address: ' + internal_address)
+                    internal_addresses.append(internal_address)
         except KeyError:
             pass
-
-    return unicode(socket.gethostbyname(socket.gethostname()))
+    return internal_addresses

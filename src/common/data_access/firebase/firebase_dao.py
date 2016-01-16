@@ -40,7 +40,7 @@ class FirebaseDao:
             node.name = json_data['name']
             if 'ports' in json_data:
                 node.ports = json_data['ports']
-            node.local_address = json_data['local_address']
+            node.local_addresses = json_data['local_addresses']
             node.external_address = json_data['external_address']
             return node
         else:
@@ -56,7 +56,7 @@ class FirebaseDao:
                 node.name = key
                 if 'ports' in json_data[key]:
                     node.ports = json_data[key]['ports']
-                node.local_address = json_data[key]['local_address']
+                node.local_addresses = json_data[key]['local_addresses']
                 node.external_address = json_data[key]['external_address']
                 nodes.append(node)
         return nodes

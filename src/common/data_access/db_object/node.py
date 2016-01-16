@@ -7,7 +7,7 @@ class Node:
     def __init__(self):
         self.name = None
         self.ports = None
-        self.local_address = None
+        self.local_addresses = None
         self.external_address = None
 
     def to_json(self):
@@ -38,5 +38,5 @@ class Node:
 
         return (ports_matches and
                 self.name == other_node.name and
-                self.local_address == other_node.local_address and
+                self.local_addresses == other_node.local_addresses and
                 self.external_address == other_node.external_address)
